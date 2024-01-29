@@ -1,0 +1,19 @@
+FROM debian:bullseye
+
+
+RUN apt-get update -y
+RUN mkdir -p /var/www/wordpress && chmod -R 777 /var/www/wordpress 
+RUN apt-get install -y nginx
+RUN apt-get install -y openssl
+RUN mkdir -p /var/run/nginx
+RUN mkdir -p /etc/nginx/ssl
+RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj  "/C=MA/L=KH/O=1337/OU=student/CN=amsaoub@42.ma"
+RUN apt-get clean
+
+COPY conf/nginx.conf etc/nginx/sites-available/default
+
+
+EXPOSE 443
+
+
+CMD ["nginx", "-g", "daemon off;"]
