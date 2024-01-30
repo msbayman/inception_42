@@ -14,6 +14,4 @@ RUN chmod +x /script.sh
 
 WORKDIR /run/php/wordpress
 
-EXPOSE 9000
-
 CMD [ "bash", "/script.sh" ]

@@ -12,7 +12,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - /Users/amsaoub/Desktop/inception_git/srcs/requirements:/var/www/wordpress
+      - wp-data:/var/www/wordpress
     depends_on:
       - wordpress
     restart: on-failure
@@ -22,11 +22,11 @@ services:
       context: requirements/mariadb
       dockerfile: Dockerfile
     image: mariadb
+    volumes:
+      - db-data:/var/lib/mysql
     container_name: mariadb
     env_file:
       - .env
-    ports:
-      - "3306:3306"
     restart: on-failure
 
   wordpress:
@@ -37,10 +37,21 @@ services:
     container_name: wordpress
     env_file:
       - .env
-    ports:
-      - "9000:9000"
     volumes:
-      - /Users/amsaoub/Desktop/inception_git/srcs/requirements:/var/www/wordpress
+      - wp-data:/var/www/wordpress
     depends_on:
       - mariadb
     restart: on-failure
+
+volumes:
+  wp-data:
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/amsaoub/tmp/wp
+
+  db-data:
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/amsaoub/tmp/db
