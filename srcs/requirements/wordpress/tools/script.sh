@@ -22,13 +22,8 @@ wp core install --allow-root \
 	--path=$WP_PATH \
 || echo "Error installing WordPress";
 
-# wp user create --allow-root $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
-# 	--user_pass=$WORDPRESS_USER_PASSWORD \
-# 	--role=author --path=$WP_PATH || echo "error 3"
-
-wp user create --allow-root "$WORDPRESS_USER" "$WORDPRESS_USER_EMAIL" \
-    --user_pass="$WORDPRESS_USER_PASSWORD" \
-    --role=author --path="$WP_PATH" || echo "error 3"
-
+wp user create --allow-root $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
+    --user_pass=$WORDPRESS_USER_PASSWORD \
+    --role=author --path=$WP_PATH || echo "error 3"
 
 /usr/sbin/php-fpm7.4 -F || echo "error 4"
