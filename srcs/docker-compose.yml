@@ -48,10 +48,10 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/amsaoub/tmp/wp
+      device: /home/amsaoub/data/wp
 
   db-data:
     driver_opts:
       o: bind
       type: none
-      device: /Users/amsaoub/tmp/db
+      device: /home/amsaoub/data/db
